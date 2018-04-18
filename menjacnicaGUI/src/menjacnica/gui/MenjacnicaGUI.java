@@ -47,31 +47,32 @@ public class MenjacnicaGUI extends JFrame {
 	private JPanel panel;
 	private JPanel panel_1;
 
-private JTable table;
-private JMenuBar menuBar;
-private JMenu mnDatoteka;
-private JMenuItem mntmOpen;
-private JMenuItem mntmSave;
-private JMenuItem mntmHelp;
-private JMenuItem mntmExit;
-private JButton btnNewButton_3;
-private JButton btnNewButton_4;
-private JButton btnNewButton_5;
-private JButton btnDodajKurs;
-private JMenuBar menuBar_1;
-private JMenu mnNewMenu;
-private JMenu mnNewMenu_1;
-private JMenuItem mntmOpen_1;
-private JMenuItem mntmSave_1;
-private JMenuItem mntmExit_1;
-private JMenuItem mntmAbout;
-private JMenuItem mntmDodajKurs;
-private JMenuItem mntmObrisiKurs;
-private JMenuItem mntmIzvrsiIzmene;
-private JScrollPane scrollPane_1;
-private JTable table_1;
-private JPopupMenu popupMenu;
-private static JTextArea textArea;
+	private JTable table;
+	private JMenuBar menuBar;
+	private JMenu mnDatoteka;
+	private JMenuItem mntmOpen;
+	private JMenuItem mntmSave;
+	private JMenuItem mntmHelp;
+	private JMenuItem mntmExit;
+	private JButton btnNewButton_3;
+	private JButton btnNewButton_4;
+	private JButton btnNewButton_5;
+	private JButton btnDodajKurs;
+	private JMenuBar menuBar_1;
+	private JMenu mnNewMenu;
+	private JMenu mnNewMenu_1;
+	private JMenuItem mntmOpen_1;
+	private JMenuItem mntmSave_1;
+	private JMenuItem mntmExit_1;
+	private JMenuItem mntmAbout;
+	private JMenuItem mntmDodajKurs;
+	private JMenuItem mntmObrisiKurs;
+	private JMenuItem mntmIzvrsiIzmene;
+	private JScrollPane scrollPane_1;
+	private JTable table_1;
+	private JPopupMenu popupMenu;
+	private static JTextArea textArea;
+
 	/**
 	 * Launch the application.
 	 */
@@ -105,15 +106,15 @@ private static JTextArea textArea;
 		contentPane.add(getPanel_1(), BorderLayout.SOUTH);
 		contentPane.add(getScrollPane_1(), BorderLayout.CENTER);
 	}
-	
+
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
 			GridBagLayout gbl_panel = new GridBagLayout();
-			gbl_panel.columnWidths = new int[]{0, 0};
-			gbl_panel.rowHeights = new int[]{0, 0, 0, 0};
-			gbl_panel.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+			gbl_panel.columnWidths = new int[] { 0, 0 };
+			gbl_panel.rowHeights = new int[] { 0, 0, 0, 0 };
+			gbl_panel.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
+			gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 			panel.setLayout(gbl_panel);
 			GridBagConstraints gbc_btnNewButton_3 = new GridBagConstraints();
 			gbc_btnNewButton_3.insets = new Insets(0, 0, 5, 0);
@@ -136,35 +137,29 @@ private static JTextArea textArea;
 		}
 		return panel;
 	}
+
 	private JPanel getPanel_1() {
 		if (panel_1 == null) {
 			panel_1 = new JPanel();
 			panel_1.setBorder(new TitledBorder(null, "STATUS", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-			
+
 			JScrollPane scrollPane = new JScrollPane();
 			GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-			gl_panel_1.setHorizontalGroup(
-				gl_panel_1.createParallelGroup(Alignment.LEADING)
-					.addGroup(gl_panel_1.createSequentialGroup()
-						.addGap(29)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 347, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(36, Short.MAX_VALUE))
-			);
-			gl_panel_1.setVerticalGroup(
-				gl_panel_1.createParallelGroup(Alignment.LEADING)
-					.addGroup(gl_panel_1.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-						.addContainerGap())
-			);
-			
-			 textArea = new JTextArea();
+			gl_panel_1.setHorizontalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel_1.createSequentialGroup().addGap(29)
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 347, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(36, Short.MAX_VALUE)));
+			gl_panel_1.setVerticalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel_1.createSequentialGroup().addContainerGap()
+							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+							.addContainerGap()));
+
+			textArea = new JTextArea();
 			scrollPane.setViewportView(textArea);
 			panel_1.setLayout(gl_panel_1);
 		}
 		return panel_1;
 	}
-		
 
 	private JButton getBtnNewButton_4() {
 		if (btnNewButton_4 == null) {
@@ -172,32 +167,40 @@ private static JTextArea textArea;
 			btnNewButton_4.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					ObrisiKursGUI o = new ObrisiKursGUI();
-										o.setVisible(true);
+					o.setVisible(true);
 				}
 			});
 		}
 		return btnNewButton_4;
 	}
+
 	private JButton getBtnNewButton_5() {
 		if (btnNewButton_5 == null) {
 			btnNewButton_5 = new JButton("Izvrsi zamenu");
+			btnNewButton_5.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					IzvrsiZamenuGUI oo = new IzvrsiZamenuGUI();
+					oo.setVisible(true);
+				}
+			});
 		}
 		return btnNewButton_5;
 	}
+
 	private JButton getBtnDodajKurs() {
 		if (btnDodajKurs == null) {
 			btnDodajKurs = new JButton("Dodaj kurs");
 			btnDodajKurs.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					DodajKursGUI dd = new DodajKursGUI();
-									dd.setVisible(true);
+					dd.setVisible(true);
 				}
 			});
-			
+
 		}
 		return btnDodajKurs;
 	}
-	
+
 	private JMenuBar getMenuBar_1() {
 		if (menuBar_1 == null) {
 			menuBar_1 = new JMenuBar();
@@ -206,6 +209,7 @@ private static JTextArea textArea;
 		}
 		return menuBar_1;
 	}
+
 	private JMenu getMnNewMenu() {
 		if (mnNewMenu == null) {
 			mnNewMenu = new JMenu("File");
@@ -215,88 +219,93 @@ private static JTextArea textArea;
 		}
 		return mnNewMenu;
 	}
+
 	private JMenu getMnNewMenu_1() {
 		if (mnNewMenu_1 == null) {
 			mnNewMenu_1 = new JMenu("Help");
 			mnNewMenu_1.add(getMntmAbout());
 		}
-		
+
 		return mnNewMenu_1;
 	}
-	
+
 	private JMenuItem getMntmOpen_1() {
 		if (mntmOpen_1 == null) {
- 			mntmOpen_1 = new JMenuItem("Open");
+			mntmOpen_1 = new JMenuItem("Open");
 			mntmOpen_1.setIcon(new ImageIcon(
 					MenjacnicaGUI.class.getResource("/com/sun/java/swing/plaf/windows/icons/Directory.gif")));
 			mntmOpen_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
- 			
- 			mntmOpen_1.addActionListener(new ActionListener() {
- 				public void actionPerformed(ActionEvent arg0) {
- 					
+
+			mntmOpen_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+
 					JFileChooser fc = new JFileChooser();
 					fc.setDialogTitle("Izaberite fajl: ");
 					fc.showOpenDialog(fc);
 					if (fc.getSelectedFile() != null)
-			
+
 						textArea.append("Uèitan fajl: " + fc.getSelectedFile().getAbsolutePath());
-					
-					
- 				} 
- 				
- 			});
- 		}
- 		return mntmOpen_1;
+
+				}
+
+			});
+		}
+		return mntmOpen_1;
 	}
+
 	private JMenuItem getMntmSave_1() {
 		if (mntmSave_1 == null) {
 			mntmSave_1 = new JMenuItem("Save");
-			
-			mntmSave_1.setIcon(new ImageIcon(MenjacnicaGUI.class.getResource("/javax/swing/plaf/metal/icons/ocean/floppy.gif")));
+
+			mntmSave_1.setIcon(
+					new ImageIcon(MenjacnicaGUI.class.getResource("/javax/swing/plaf/metal/icons/ocean/floppy.gif")));
 			mntmSave_1.addActionListener(new ActionListener() {
-								public void actionPerformed(ActionEvent e) {
-				
-									JFileChooser fc = new JFileChooser();
-									fc.setDialogTitle("Izaberite fajl: ");
-									fc.showSaveDialog(fc);
-									if (fc.getSelectedFile() != null)
-										textArea.append("Saèuvan fajl: " + fc.getSelectedFile().getAbsolutePath());
-								}
-							});
-		
+				public void actionPerformed(ActionEvent e) {
+
+					JFileChooser fc = new JFileChooser();
+					fc.setDialogTitle("Izaberite fajl: ");
+					fc.showSaveDialog(fc);
+					if (fc.getSelectedFile() != null)
+						textArea.append("Saèuvan fajl: " + fc.getSelectedFile().getAbsolutePath());
+				}
+			});
+
 			mntmSave_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
 		}
-		
+
 		return mntmSave_1;
 	}
+
 	private JMenuItem getMntmExit_1() {
 		if (mntmExit_1 == null) {
 			mntmExit_1 = new JMenuItem("Exit");
 			mntmExit_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					int opcija = JOptionPane.showConfirmDialog(null, "Da li zelite da izadjete?", "Izlazak",
-											JOptionPane.YES_NO_CANCEL_OPTION);
-							
-									if (opcija == JOptionPane.YES_OPTION)
-										System.exit(0);
+							JOptionPane.YES_NO_CANCEL_OPTION);
+
+					if (opcija == JOptionPane.YES_OPTION)
+						System.exit(0);
 				}
 			});
-			
+
 		}
 		return mntmExit_1;
 	}
+
 	private JMenuItem getMntmAbout() {
 		if (mntmAbout == null) {
 			mntmAbout = new JMenuItem("About");
 			mntmAbout.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					JOptionPane.showMessageDialog(null, "Aplikacija menjacnica, autor Jovana Drobnjakovic", "O aplikaciji" , JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Aplikacija menjacnica, autor Jovana Drobnjakovic",
+							"O aplikaciji", JOptionPane.INFORMATION_MESSAGE);
 				}
 			});
 		}
 		return mntmAbout;
 	}
-	
+
 	private JScrollPane getScrollPane_1() {
 		if (scrollPane_1 == null) {
 			scrollPane_1 = new JScrollPane();
@@ -304,42 +313,34 @@ private static JTextArea textArea;
 		}
 		return scrollPane_1;
 	}
+
 	private JTable getTable_1_1() {
 		if (table_1 == null) {
 			table_1 = new JTable();
 			table_1.setModel(new DefaultTableModel(
-				new Object[][] {
-					{null, "", "", "", "", null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-				},
-				new String[] {
-					"Sifra", "Skraceni naziv", "Prodajni", "Srednji", "Kupovni", "Naziv"
-				}
-			));
+					new Object[][] { { null, "", "", "", "", null }, { null, null, null, null, null, null },
+							{ null, null, null, null, null, null }, { null, null, null, null, null, null },
+							{ null, null, null, null, null, null }, { null, null, null, null, null, null },
+							{ null, null, null, null, null, null }, { null, null, null, null, null, null },
+							{ null, null, null, null, null, null }, { null, null, null, null, null, null },
+							{ null, null, null, null, null, null }, },
+					new String[] { "Sifra", "Skraceni naziv", "Prodajni", "Srednji", "Kupovni", "Naziv" }));
 			addPopup(table_1, getPopupMenu());
 		}
 		return table_1;
 	}
+
 	private JPopupMenu getPopupMenu() {
 		if (popupMenu == null) {
 			popupMenu = new JPopupMenu();
-			
-							
-						popupMenu.add(getMntmDodajKurs());
-							popupMenu.add(getMntmObrisiKurs());
-							popupMenu.add(getMntmIzvrsiIzmene());
+
+			popupMenu.add(getMntmDodajKurs());
+			popupMenu.add(getMntmObrisiKurs());
+			popupMenu.add(getMntmIzvrsiIzmene());
 		}
 		return popupMenu;
 	}
+
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -347,51 +348,62 @@ private static JTextArea textArea;
 					showMenu(e);
 				}
 			}
+
 			public void mouseReleased(MouseEvent e) {
 				if (e.isPopupTrigger()) {
 					showMenu(e);
 				}
 			}
+
 			private void showMenu(MouseEvent e) {
 				popup.show(e.getComponent(), e.getX(), e.getY());
 			}
 		});
 	}
+
 	private JMenuItem getMntmDodajKurs() {
-				if (mntmDodajKurs == null) {
-					mntmDodajKurs = new JMenuItem("Dodaj kurs");
-					mntmDodajKurs.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							DodajKursGUI dodaj = new DodajKursGUI();
-											dodaj.setVisible(true);
-						}
-					});
+		if (mntmDodajKurs == null) {
+			mntmDodajKurs = new JMenuItem("Dodaj kurs");
+			mntmDodajKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					DodajKursGUI dodaj = new DodajKursGUI();
+					dodaj.setVisible(true);
 				}
-				return mntmDodajKurs;
-			}
-		private JMenuItem getMntmObrisiKurs() {
-				if (mntmObrisiKurs == null) {
-					mntmObrisiKurs = new JMenuItem("Obri\u0161i kurs");
-					mntmObrisiKurs.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							ObrisiKursGUI oo = new ObrisiKursGUI();
-												oo.setVisible(true);
-						}
-					});
-				}
-			return mntmObrisiKurs;
+			});
 		}
-			private JMenuItem getMntmIzvrsiIzmene() {
-				if (mntmIzvrsiIzmene == null) {
-					mntmIzvrsiIzmene = new JMenuItem("Izvr\u0161i zamene");
+		return mntmDodajKurs;
+	}
+
+	private JMenuItem getMntmObrisiKurs() {
+		if (mntmObrisiKurs == null) {
+			mntmObrisiKurs = new JMenuItem("Obri\u0161i kurs");
+			mntmObrisiKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					ObrisiKursGUI oo = new ObrisiKursGUI();
+					oo.setVisible(true);
 				}
-				return mntmIzvrsiIzmene;
-			}
-			
-					public static JTextArea getTextArea() {
-				 		if (textArea == null) {
-				 			textArea = new JTextArea();
-				 		}
-				 		return textArea;
-					}
+			});
+		}
+		return mntmObrisiKurs;
+	}
+
+	private JMenuItem getMntmIzvrsiIzmene() {
+		if (mntmIzvrsiIzmene == null) {
+			mntmIzvrsiIzmene = new JMenuItem("Izvr\u0161i zamene");
+			mntmIzvrsiIzmene.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					IzvrsiZamenuGUI oo = new IzvrsiZamenuGUI();
+					oo.setVisible(true);
+				}
+			});
+		}
+		return mntmIzvrsiIzmene;
+	}
+
+	public static JTextArea getTextArea() {
+		if (textArea == null) {
+			textArea = new JTextArea();
+		}
+		return textArea;
+	}
 }
