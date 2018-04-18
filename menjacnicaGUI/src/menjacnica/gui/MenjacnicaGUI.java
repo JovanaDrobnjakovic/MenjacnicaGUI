@@ -65,14 +65,13 @@ private JMenuItem mntmOpen_1;
 private JMenuItem mntmSave_1;
 private JMenuItem mntmExit_1;
 private JMenuItem mntmAbout;
-private JTextPane textPane;
 private JMenuItem mntmDodajKurs;
 private JMenuItem mntmObrisiKurs;
 private JMenuItem mntmIzvrsiIzmene;
 private JScrollPane scrollPane_1;
 private JTable table_1;
 private JPopupMenu popupMenu;
-
+private static JTextArea textArea;
 	/**
 	 * Launch the application.
 	 */
@@ -141,20 +140,26 @@ private JPopupMenu popupMenu;
 		if (panel_1 == null) {
 			panel_1 = new JPanel();
 			panel_1.setBorder(new TitledBorder(null, "STATUS", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+			
+			JScrollPane scrollPane = new JScrollPane();
 			GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 			gl_panel_1.setHorizontalGroup(
 				gl_panel_1.createParallelGroup(Alignment.LEADING)
 					.addGroup(gl_panel_1.createSequentialGroup()
-						.addComponent(getTextPane(), GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
-						.addGap(20))
+						.addGap(29)
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 347, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(36, Short.MAX_VALUE))
 			);
 			gl_panel_1.setVerticalGroup(
 				gl_panel_1.createParallelGroup(Alignment.LEADING)
 					.addGroup(gl_panel_1.createSequentialGroup()
 						.addContainerGap()
-						.addComponent(getTextPane(), GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-						.addGap(28))
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+						.addContainerGap())
 			);
+			
+			 textArea = new JTextArea();
+			scrollPane.setViewportView(textArea);
 			panel_1.setLayout(gl_panel_1);
 		}
 		return panel_1;
@@ -164,6 +169,12 @@ private JPopupMenu popupMenu;
 	private JButton getBtnNewButton_4() {
 		if (btnNewButton_4 == null) {
 			btnNewButton_4 = new JButton("Obrisi kurs");
+			btnNewButton_4.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					ObrisiKursGUI o = new ObrisiKursGUI();
+										o.setVisible(true);
+				}
+			});
 		}
 		return btnNewButton_4;
 	}
@@ -176,6 +187,12 @@ private JPopupMenu popupMenu;
 	private JButton getBtnDodajKurs() {
 		if (btnDodajKurs == null) {
 			btnDodajKurs = new JButton("Dodaj kurs");
+			btnDodajKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					DodajKursGUI dd = new DodajKursGUI();
+									dd.setVisible(true);
+				}
+			});
 			
 		}
 		return btnDodajKurs;
@@ -222,7 +239,8 @@ private JPopupMenu popupMenu;
 					fc.showOpenDialog(fc);
 					if (fc.getSelectedFile() != null)
 			
-					textPane.setText(textPane.getText() + "Uèitan fajl je: " + fc.getSelectedFile().getAbsolutePath());
+						textArea.append("Uèitan fajl: " + fc.getSelectedFile().getAbsolutePath());
+					
 					
  				} 
  				
@@ -242,7 +260,7 @@ private JPopupMenu popupMenu;
 									fc.setDialogTitle("Izaberite fajl: ");
 									fc.showSaveDialog(fc);
 									if (fc.getSelectedFile() != null)
-									textPane.setText(textPane.getText() + "Saèuvan fajl: " + fc.getSelectedFile().getAbsolutePath());
+										textArea.append("Saèuvan fajl: " + fc.getSelectedFile().getAbsolutePath());
 								}
 							});
 		
@@ -277,13 +295,6 @@ private JPopupMenu popupMenu;
 			});
 		}
 		return mntmAbout;
-	}
-	
-	private JTextPane getTextPane() {
-		if (textPane == null) {
-			textPane = new JTextPane();
-		}
-		return textPane;
 	}
 	
 	private JScrollPane getScrollPane_1() {
@@ -349,12 +360,24 @@ private JPopupMenu popupMenu;
 	private JMenuItem getMntmDodajKurs() {
 				if (mntmDodajKurs == null) {
 					mntmDodajKurs = new JMenuItem("Dodaj kurs");
+					mntmDodajKurs.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							DodajKursGUI dodaj = new DodajKursGUI();
+											dodaj.setVisible(true);
+						}
+					});
 				}
 				return mntmDodajKurs;
 			}
 		private JMenuItem getMntmObrisiKurs() {
 				if (mntmObrisiKurs == null) {
 					mntmObrisiKurs = new JMenuItem("Obri\u0161i kurs");
+					mntmObrisiKurs.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							ObrisiKursGUI oo = new ObrisiKursGUI();
+												oo.setVisible(true);
+						}
+					});
 				}
 			return mntmObrisiKurs;
 		}
@@ -364,4 +387,11 @@ private JPopupMenu popupMenu;
 				}
 				return mntmIzvrsiIzmene;
 			}
+			
+					public static JTextArea getTextArea() {
+				 		if (textArea == null) {
+				 			textArea = new JTextArea();
+				 		}
+				 		return textArea;
+					}
 }
