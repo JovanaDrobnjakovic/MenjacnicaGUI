@@ -31,21 +31,22 @@ import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextArea;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class MenjacnicaGUI extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel panel;
 	private JPanel panel_1;
-private JButton btnNewButton;
-private JButton btnNewButton_1;
-private JButton btnNewButton_2;
+
 private JTable table;
 private JMenuBar menuBar;
 private JMenu mnDatoteka;
@@ -57,7 +58,6 @@ private JButton btnNewButton_3;
 private JButton btnNewButton_4;
 private JButton btnNewButton_5;
 private JButton btnDodajKurs;
-private JTable table_1;
 private JMenuBar menuBar_1;
 private JMenu mnNewMenu;
 private JMenu mnNewMenu_1;
@@ -66,11 +66,13 @@ private JMenuItem mntmSave_1;
 private JMenuItem mntmExit_1;
 private JMenuItem mntmAbout;
 private JTextPane textPane;
-private JPopupMenu popupMenu;
-private JScrollPane scrollPane;
 private JMenuItem mntmDodajKurs;
 private JMenuItem mntmObrisiKurs;
-private JMenuItem mntmIzvrsiIzmenu;
+private JMenuItem mntmIzvrsiIzmene;
+private JScrollPane scrollPane_1;
+private JTable table_1;
+private JPopupMenu popupMenu;
+
 	/**
 	 * Launch the application.
 	 */
@@ -102,7 +104,7 @@ private JMenuItem mntmIzvrsiIzmenu;
 		contentPane.setLayout(new BorderLayout(0, 0));
 		contentPane.add(getPanel(), BorderLayout.EAST);
 		contentPane.add(getPanel_1(), BorderLayout.SOUTH);
-		contentPane.add(getTable_1(), BorderLayout.CENTER);
+		contentPane.add(getScrollPane_1(), BorderLayout.CENTER);
 	}
 	
 	private JPanel getPanel() {
@@ -142,14 +144,16 @@ private JMenuItem mntmIzvrsiIzmenu;
 			GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 			gl_panel_1.setHorizontalGroup(
 				gl_panel_1.createParallelGroup(Alignment.LEADING)
-					.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-						.addContainerGap()
+					.addGroup(gl_panel_1.createSequentialGroup()
 						.addComponent(getTextPane(), GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
-						.addContainerGap())
+						.addGap(20))
 			);
 			gl_panel_1.setVerticalGroup(
-				gl_panel_1.createParallelGroup(Alignment.TRAILING)
-					.addComponent(getTextPane(), Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+				gl_panel_1.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel_1.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(getTextPane(), GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+						.addGap(28))
 			);
 			panel_1.setLayout(gl_panel_1);
 		}
@@ -176,37 +180,7 @@ private JMenuItem mntmIzvrsiIzmenu;
 		}
 		return btnDodajKurs;
 	}
-	private JScrollPane getScrollPane() {
-		if (scrollPane == null) {
-			scrollPane = new JScrollPane();
-			scrollPane.setViewportView(getTable_1());		}
-		return scrollPane;
-	}
-	private JTable getTable_1() {
-		if (table_1 == null) {
-			table_1 = new JTable();
-			table_1.setModel(new DefaultTableModel(
-				new Object[][] {
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-					{null, null, null, null, null, null},
-				},
-				new String[] {
-					"Sifra", "Skraceni naziv", "Prodajni", "Srednji", "Kupovni", "Naziv"
-				}
-			));
-			addPopup(table_1, getPopupMenu());
-		}
-		return table_1;
-	}
+	
 	private JMenuBar getMenuBar_1() {
 		if (menuBar_1 == null) {
 			menuBar_1 = new JMenuBar();
@@ -229,8 +203,10 @@ private JMenuItem mntmIzvrsiIzmenu;
 			mnNewMenu_1 = new JMenu("Help");
 			mnNewMenu_1.add(getMntmAbout());
 		}
+		
 		return mnNewMenu_1;
 	}
+	
 	private JMenuItem getMntmOpen_1() {
 		if (mntmOpen_1 == null) {
  			mntmOpen_1 = new JMenuItem("Open");
@@ -240,13 +216,16 @@ private JMenuItem mntmIzvrsiIzmenu;
  			
  			mntmOpen_1.addActionListener(new ActionListener() {
  				public void actionPerformed(ActionEvent arg0) {
-
+ 					
 					JFileChooser fc = new JFileChooser();
 					fc.setDialogTitle("Izaberite fajl: ");
 					fc.showOpenDialog(fc);
+					if (fc.getSelectedFile() != null)
+			
+					textPane.setText(textPane.getText() + "Uèitan fajl je: " + fc.getSelectedFile().getAbsolutePath());
 					
-
- 				}
+ 				} 
+ 				
  			});
  		}
  		return mntmOpen_1;
@@ -262,6 +241,8 @@ private JMenuItem mntmIzvrsiIzmenu;
 									JFileChooser fc = new JFileChooser();
 									fc.setDialogTitle("Izaberite fajl: ");
 									fc.showSaveDialog(fc);
+									if (fc.getSelectedFile() != null)
+									textPane.setText(textPane.getText() + "Saèuvan fajl: " + fc.getSelectedFile().getAbsolutePath());
 								}
 							});
 		
@@ -289,21 +270,62 @@ private JMenuItem mntmIzvrsiIzmenu;
 	private JMenuItem getMntmAbout() {
 		if (mntmAbout == null) {
 			mntmAbout = new JMenuItem("About");
+			mntmAbout.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					JOptionPane.showMessageDialog(null, "Aplikacija menjacnica, autor Jovana Drobnjakovic", "O aplikaciji" , JOptionPane.INFORMATION_MESSAGE);
+				}
+			});
 		}
 		return mntmAbout;
 	}
+	
 	private JTextPane getTextPane() {
 		if (textPane == null) {
 			textPane = new JTextPane();
 		}
 		return textPane;
 	}
+	
+	private JScrollPane getScrollPane_1() {
+		if (scrollPane_1 == null) {
+			scrollPane_1 = new JScrollPane();
+			scrollPane_1.setViewportView(getTable_1_1());
+		}
+		return scrollPane_1;
+	}
+	private JTable getTable_1_1() {
+		if (table_1 == null) {
+			table_1 = new JTable();
+			table_1.setModel(new DefaultTableModel(
+				new Object[][] {
+					{null, "", "", "", "", null},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+				},
+				new String[] {
+					"Sifra", "Skraceni naziv", "Prodajni", "Srednji", "Kupovni", "Naziv"
+				}
+			));
+			addPopup(table_1, getPopupMenu());
+		}
+		return table_1;
+	}
 	private JPopupMenu getPopupMenu() {
 		if (popupMenu == null) {
 			popupMenu = new JPopupMenu();
-			popupMenu.add(getMntmDodajKurs());
-			popupMenu.add(getMntmObrisiKurs());
-			popupMenu.add(getMntmIzvrsiIzmenu());
+			
+							
+						popupMenu.add(getMntmDodajKurs());
+							popupMenu.add(getMntmObrisiKurs());
+							popupMenu.add(getMntmIzvrsiIzmene());
 		}
 		return popupMenu;
 	}
@@ -325,23 +347,21 @@ private JMenuItem mntmIzvrsiIzmenu;
 		});
 	}
 	private JMenuItem getMntmDodajKurs() {
- 		if (mntmDodajKurs == null) {
- 			mntmDodajKurs = new JMenuItem("Dodaj kurs");
- 		}
- 		return mntmDodajKurs;
- 	}
-
- 	private JMenuItem getMntmObrisiKurs() {
- 		if (mntmObrisiKurs == null) {
- 			mntmObrisiKurs = new JMenuItem("Obri\u0161i kurs");
- 		}
- 		return mntmObrisiKurs;
- 	}
-
- 	private JMenuItem getMntmIzvrsiIzmenu() {
- 		if (mntmIzvrsiIzmenu == null) {
- 			mntmIzvrsiIzmenu = new JMenuItem("Izvr\u0161i zamenu");
- 		}
- 		return mntmIzvrsiIzmenu;
- 	}
+				if (mntmDodajKurs == null) {
+					mntmDodajKurs = new JMenuItem("Dodaj kurs");
+				}
+				return mntmDodajKurs;
+			}
+		private JMenuItem getMntmObrisiKurs() {
+				if (mntmObrisiKurs == null) {
+					mntmObrisiKurs = new JMenuItem("Obri\u0161i kurs");
+				}
+			return mntmObrisiKurs;
+		}
+			private JMenuItem getMntmIzvrsiIzmene() {
+				if (mntmIzvrsiIzmene == null) {
+					mntmIzvrsiIzmene = new JMenuItem("Izvr\u0161i zamene");
+				}
+				return mntmIzvrsiIzmene;
+			}
 }
