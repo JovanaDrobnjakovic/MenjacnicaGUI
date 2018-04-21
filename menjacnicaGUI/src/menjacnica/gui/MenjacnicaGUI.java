@@ -38,6 +38,9 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JTextArea;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
@@ -93,9 +96,14 @@ public class MenjacnicaGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public MenjacnicaGUI() {
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent arg0) {
+				izlaz();
+			}
+		});
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MenjacnicaGUI.class.getResource("/slika/download.jpg")));
 		setTitle("Menjacnica");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 450, 413);
 		setJMenuBar(getMenuBar_1());
 		contentPane = new JPanel();
@@ -106,7 +114,14 @@ public class MenjacnicaGUI extends JFrame {
 		contentPane.add(getPanel_1(), BorderLayout.SOUTH);
 		contentPane.add(getScrollPane_1(), BorderLayout.CENTER);
 	}
+	private void izlaz() {
+		int opcija = JOptionPane.showConfirmDialog(null, "Da li zelite da izadjete?", "Izlazak",
+				JOptionPane.YES_NO_CANCEL_OPTION);
 
+		if (opcija == JOptionPane.YES_OPTION)
+			System.exit(0);
+	}
+	
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
@@ -288,7 +303,7 @@ public class MenjacnicaGUI extends JFrame {
 						System.exit(0);
 				}
 			});
-
+			mntmExit_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.ALT_MASK));
 		}
 		return mntmExit_1;
 	}
